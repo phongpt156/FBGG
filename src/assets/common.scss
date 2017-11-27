@@ -1,0 +1,9 @@
+@import './variable.scss';
+
+body {
+    background-color: $main-color;
+}
+
+.login-wrapper {
+    min-height: 100vh;
+}
