@@ -1,5 +1,5 @@
 exports.connectSocket = function(server,app){
-
+	var jwt = require("jsonwebtoken");
 	var io = require("socket.io")(server);
 
 	var follower = require("../database/follower.js");
@@ -17,29 +17,7 @@ exports.connectSocket = function(server,app){
 	var user_post = require("../database/user_post.js");
 	user_post.createCollection();
 
-	var obj_login;
-		app.post("/api/login",function(req,res){
-			obj_login = {
-				mail:req.mail,
-				password:req.password
-			};
-			user.find(obj_login).then(function(items){
-				if (items.length == 0) {
-			  		res.json({msg:"that bai"});
-				}else {
-				  	var token = jwt.sign({
-				  		_id:items[0]._id,
-			            name:items[0].name,
-			            nickName:items[0].nickName,
-			            mail:items[0].mail,
-			            phone:items[0].phone,
-			            address:items[0].address,
-			            ratting:items[0].ratting
-				  	}, 'FBGGJWTToken');
-				  	return res.json({token: token});
-				}	
-			})
-		});
+	
 
 	io.on("connection",function(socket){
 		console.log("connected socket: " + socket.id);
@@ -50,9 +28,20 @@ exports.connectSocket = function(server,app){
 			user.find(data).then(function(items) {
 			  if (items.length == 0) {
 			  	user.addCollection(data);
-			  	socket.emit("register_completed",1);
+
+			  	var token = jwt.sign({
+			            name:data.name,
+			            nickName:data.nickName,
+			            mail:data.mail,
+			            phone:data.phone,
+			            address:data.address			           
+				  	}, 'FBGGJWTToken',{
+				          expiresIn: '3d' // expires in 3 day
+				        });
+
+			  	socket.emit("register_res",{token:token});
 			  }else {
-			  	socket.emit("register_fail",0);
+			  	socket.emit("register_res",{msg:"that_bai"});
 			  }
 			});
 		});
@@ -66,6 +55,8 @@ exports.connectSocket = function(server,app){
 				}
 			});
 		});
+
+
 	});
 
 	io.on("disconnect",function(){
