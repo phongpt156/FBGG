@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -10,7 +10,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 
 import { AppRoutingModule } from './app-routing.module';
 
-import { LoginSocketIoService } from './shared/services/login/login-socket-io.service';
+import { TokenInterceptor } from './shared/services/auth/token.interceptor';
+
+import { AuthService } from './shared/services/auth/auth.service';
+import { LoginService } from './shared/services/login/login.service';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -36,7 +39,13 @@ import { NotFoundComponent } from './not-found/not-found.component';
     AppRoutingModule
   ],
   providers: [
-    LoginSocketIoService
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    },
+    AuthService,
+    LoginService
   ],
   bootstrap: [AppComponent]
 })
