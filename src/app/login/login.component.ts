@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { LoginSocketIoService } from './../shared/services/login/login-socket-io.service';
+import { ERROR_MESSAGES } from './../shared/constants/constants';
+
+import { LoginService } from './../shared/services/login/login.service';
 
 @Component({
   selector: 'app-login',
@@ -10,10 +12,12 @@ import { LoginSocketIoService } from './../shared/services/login/login-socket-io
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
+  errorMessages = ERROR_MESSAGES;
+  submitted = false;
 
   constructor(
     private _fb: FormBuilder,
-    private loginSocketIoService: LoginSocketIoService
+    private loginService: LoginService
   ) { }
 
   ngOnInit() {
@@ -24,11 +28,13 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
+    this.submitted = true;
+
     if (this.loginForm.valid) {
       const body: any = {};
       body.mail = this.loginForm.value.mail;
       body.password = this.loginForm.value.password;
-      this.loginSocketIoService.login(body)
+      this.loginService.login(body)
       .subscribe(res => {
         console.log(res);
       });

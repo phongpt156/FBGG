@@ -1,15 +1,15 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { LoginSocketIoService } from './login-socket-io.service';
+import { LoginService } from './login.service';
 
 describe('LoginSocketIoService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [LoginSocketIoService]
+      providers: [LoginService]
     });
   });
 
-  it('should be created', inject([LoginSocketIoService], (service: LoginSocketIoService) => {
+  it('should be created', inject([LoginService], (service: LoginService) => {
     expect(service).toBeTruthy();
   }));
 });
