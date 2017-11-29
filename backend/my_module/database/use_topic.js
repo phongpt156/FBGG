@@ -2,7 +2,7 @@ var mongo_client = require("mongodb").MongoClient;
 var url = "mongodb://localhost:27017/data_fbgg";
 var autoIncrement = require("mongodb-autoincrement");
 
-var name_collection = "user_post";
+var name_collection = "user_topic";
 
 exports.createCollection = function(){	
 	mongo_client.connect(url,function(err,db){
@@ -23,11 +23,8 @@ exports.addCollection = function(data){
 			        var collection = db.collection(name_collection);
 			        collection.insert({
 			            _id: autoIndex,
-			            user_id:data.user_id,
-			            post_id:data.post_id,
-			            view:data.view,
-			            pin:data.pin,
-			            ratting:data.ratting
+                        user_id:data.user_id,
+                        topic_id:data.topic_id
 			        });
 			        console.log("inserted collection "+ name_collection);
 			    });
@@ -42,7 +39,7 @@ exports.find = function(data){
     }).then(function(items) {
       return items;
     });
-};
+}
 
 exports.deleted = function(data){
 	mongo_client.connect(url,function(err,db){

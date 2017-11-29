@@ -1,6 +1,9 @@
-import { Component, OnInit, HostBinding } from '@angular/core';
+import { Component, OnInit, HostBinding, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { DEFAULT_AVATAR_PATH } from './../../../shared/constants/constants';
+
+import { AuthService } from './../../../shared/services/auth/auth.service';
 
 @Component({
   selector: 'app-aside-menu',
@@ -9,12 +12,19 @@ import { DEFAULT_AVATAR_PATH } from './../../../shared/constants/constants';
 })
 export class AsideMenuComponent implements OnInit {
   @HostBinding('class') classes = 'mat-elevation-z2';
-
+  @Input() user: any;
   defaultAvatarPath: string = DEFAULT_AVATAR_PATH;
 
-  constructor() { }
+  constructor(
+    private router: Router,
+    private authService: AuthService
+  ) { }
 
   ngOnInit() {
   }
 
+  logout() {
+    this.authService.removeToken();
+    this.router.navigate(['/dang-nhap']);
+  }
 }

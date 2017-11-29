@@ -1,24 +1,7 @@
-var follower = require("../database/follower.js");
-	
-var post = require("../database/post.js");
-
-var post_topic = require("../database/post_topic.js");
-
-var topic = require("../database/topic.js");
-
 var user = require("../database/user.js");
-
-var user_comment_post = require("../database/user_comment_post.js");
-
-var user_post = require("../database/user_post.js");
-	
 var jwt = require("jsonwebtoken");
 
 exports.routers = function(app){
-
-	app.get("/",function(req,res){
-		res.render("home");
-	});
 	
 	var obj_login;
 		app.post("/api/login",function(req,res){

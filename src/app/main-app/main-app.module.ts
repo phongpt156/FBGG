@@ -17,6 +17,7 @@ import { PostItemComponent } from './homepage/body/main-body/post-item/post-item
 import { RightMenuComponent } from './menu/right-menu/right-menu.component';
 import { NoteListComponent } from './menu/right-menu/note-list/note-list.component';
 import { SuggestComponent } from './menu/right-menu/suggest/suggest.component';
+import { PreloadPostComponent } from './homepage/body/main-body/post-list/preload-post/preload-post.component';
 
 @NgModule({
   imports: [
@@ -36,7 +37,8 @@ import { SuggestComponent } from './menu/right-menu/suggest/suggest.component';
     PostItemComponent,
     RightMenuComponent,
     NoteListComponent,
-    SuggestComponent
+    SuggestComponent,
+    PreloadPostComponent
   ]
 })
 export class MainAppModule { }

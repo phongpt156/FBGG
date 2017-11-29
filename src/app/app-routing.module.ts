@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { CustomPreloader } from './shared/classes/custom.preloader';
+import { AuthGuardService } from './shared/guards/auth-guard.service';
+import { CheckLoginService } from './shared/guards/check-login.service';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -13,8 +15,8 @@ const appRoutes: Routes = [
     path: '',
     component: AppComponent,
     children: [
-      { path: '', loadChildren: './main-app/main-app.module#MainAppModule' },
-      { path: 'dang-nhap', component: LoginComponent },
+      { path: '', loadChildren: './main-app/main-app.module#MainAppModule', canActivate: [AuthGuardService] },
+      { path: 'dang-nhap', component: LoginComponent, canActivate: [CheckLoginService] },
       { path: 'dang-ky', component: RegisterComponent }
     ]
   },

@@ -1,10 +1,24 @@
 <div class="aside-container pt-3">
-  <a class="pl-3 mb-4 d-flex align-items-center">
-    <div class="avatar img-wrapper">
-      <a><img [src]="defaultAvatarPath" alt="" /></a>
+  <a mat-button class="pl-3 mb-4 d-flex" [matMenuTriggerFor]="menu" color="accent">
+    <div class="d-flex align-items-center">
+      <div class="avatar img-wrapper">
+        <a><img [src]="user.avatar ? user.avatar : defaultAvatarPath" alt="" /></a>
+      </div>
+      <div class="pl-3">{{ user.nickName ? user.nickName : user.name }}</div>
     </div>
-    <div class="pl-3">Hoang Tien Dat</div>
   </a>
+  
+  <mat-menu #menu="matMenu" xPosition="before" color="accent">
+    <button mat-menu-item color="accent">
+      <mat-icon>account_circle</mat-icon>
+      <span>Trang cá nhân</span>
+    </button>
+    <button mat-menu-item (click)="logout()" color="accent">
+      <mat-icon>exit_to_app</mat-icon>
+      <span>Đăng xuất</span>
+    </button>
+  </mat-menu>
+  
   <div class="pb-4">
     <a class="pl-4 py-1 d-flex align-items-center">
       <div class="mix-icon-wrapper img-wrapper d-flex align-items-center">

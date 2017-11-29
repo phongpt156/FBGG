@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { ERROR_MESSAGES } from './../shared/constants/constants';
 
+import { LoaderService } from './../shared/services/loader/loader.service';
 import { LoginService } from './../shared/services/login/login.service';
 
 @Component({
@@ -17,7 +18,8 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private _fb: FormBuilder,
-    private loginService: LoginService
+    private loaderService: LoaderService,
+    private loginService: LoginService,
   ) { }
 
   ngOnInit() {
@@ -32,6 +34,10 @@ export class RegisterComponent implements OnInit {
       phone: ['', Validators.required],
       address: ['', Validators.required]
     });
+
+    setTimeout(() => {
+      this.loaderService.setLoadingStatus(false);
+    }, 500);
   }
 
   onSubmit() {

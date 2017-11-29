@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { ERROR_MESSAGES } from './../shared/constants/constants';
 
+import { LoaderService } from './../shared/services/loader/loader.service';
 import { LoginService } from './../shared/services/login/login.service';
+import { AuthService } from './../shared/services/auth/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -16,8 +19,11 @@ export class LoginComponent implements OnInit {
   submitted = false;
 
   constructor(
+    private router: Router,
     private _fb: FormBuilder,
-    private loginService: LoginService
+    private loaderService: LoaderService,
+    private loginService: LoginService,
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
@@ -25,6 +31,10 @@ export class LoginComponent implements OnInit {
       mail: ['', Validators.required],
       password: ['', Validators.required]
     });
+
+    setTimeout(() => {
+      this.loaderService.setLoadingStatus(false);
+    }, 500);
   }
 
   onSubmit() {
@@ -36,7 +46,10 @@ export class LoginComponent implements OnInit {
       body.password = this.loginForm.value.password;
       this.loginService.login(body)
       .subscribe(res => {
-        console.log(res);
+        if (res.token) {
+          this.authService.setToken(res.token);
+          this.router.navigate(['/']);
+        }
       });
     }
   }

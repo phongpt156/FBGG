@@ -12,6 +12,10 @@ export class AuthGuardService implements CanActivate {
   ) { }
 
   canActivate() {
+    if (this.authService.getToken() === 'undefined' || !this.authService.isAuthenticated()) {
+      this.router.navigate(['/dang-nhap']);
+      return false;
+    }
     return true;
   }
 }

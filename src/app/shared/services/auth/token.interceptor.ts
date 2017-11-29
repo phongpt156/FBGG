@@ -13,7 +13,7 @@ export class TokenInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const headers: any = {};
 
-    if (this.authService.isAuthenticated()) {
+    if (this.authService.getToken() !== 'undefined' && this.authService.isAuthenticated()) {
       headers.token = this.authService.getToken();      
     }
 

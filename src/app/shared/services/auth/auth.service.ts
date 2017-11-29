@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { tokenNotExpired } from 'angular2-jwt';
+import { tokenNotExpired, JwtHelper } from 'angular2-jwt';
 
 @Injectable()
 export class AuthService {
@@ -22,5 +22,10 @@ export class AuthService {
     const token = this.getToken();
 
     return tokenNotExpired(null, token);
+  }
+
+  decodeToken() {
+    const jwtHelper: JwtHelper = new JwtHelper();
+    return jwtHelper.decodeToken(this.getToken());
   }
 }

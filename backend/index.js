@@ -20,9 +20,9 @@ server.listen(port,"0.0.0.0",function(){
 
 var user = require("./my_module/database/user.js");
 user.createCollection();
-// user.find({mail:"tien",password:"nam"}).then(function(items) {
-//   console.log(items);
-// });
+user.find().then(function(items) {
+  console.log(items);
+});
 
 
 var router = require("./my_module/router/router.js");

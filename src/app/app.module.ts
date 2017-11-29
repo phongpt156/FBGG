@@ -15,6 +15,8 @@ import { TokenInterceptor } from './shared/services/auth/token.interceptor';
 import { AuthService } from './shared/services/auth/auth.service';
 import { LoginService } from './shared/services/login/login.service';
 import { LoaderService } from './shared/services/loader/loader.service';
+import { CheckLoginService }from './shared/guards/check-login.service';
+import { AuthGuardService } from './shared/guards/auth-guard.service';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -47,7 +49,9 @@ import { NotFoundComponent } from './not-found/not-found.component';
     },
     AuthService,
     LoginService,
-    LoaderService
+    LoaderService,
+    AuthGuardService,
+    CheckLoginService
   ],
   bootstrap: [AppComponent]
 })

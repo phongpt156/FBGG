@@ -12,7 +12,7 @@ export class CheckLoginService implements CanActivate {
   ) { }
 
   canActivate() {
-    if (this.authService.isAuthenticated()) {
+    if (this.authService.getToken() !== 'undefined' && this.authService.isAuthenticated()) {
       this.router.navigate(['/']);
       return false;
     }

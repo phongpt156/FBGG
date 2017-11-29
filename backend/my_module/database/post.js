@@ -26,7 +26,8 @@ exports.addCollection = function(data){
 			            title:data.title,
 			            decription:data.decription,
 			            link:data.link,
-			            user_id:data.user_id,
+						user_id:data.user_id,
+						topic_name:data.topic_name,
 			            author:data.author,
 			            linkShare:data.linkShare,
 			            type:data.type

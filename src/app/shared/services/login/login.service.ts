@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import * as io from 'socket.io-client';
 
@@ -8,12 +9,16 @@ import { createCommonHeaders } from './../../../shared/functions/http-req';
 import { BACKEND_PATH } from './../../../shared/constants/constants';
 import { USER } from './../../../shared/api/api';
 
+import { AuthService } from './../../../shared/services/auth/auth.service';
+
 @Injectable()
 export class LoginService {
   private socket: SocketIOClient.Socket;
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private router: Router,
+    private authService: AuthService
   ) {
     this.socket = io(BACKEND_PATH);
   }
@@ -33,7 +38,10 @@ export class LoginService {
 
   consumeEvenOnRegister() {
     this.socket.on('register_res', (data) => {
-      console.log(data);
+      if (data.token) {
+        this.authService.setToken(data.token);
+        this.router.navigate(['/']);
+      }
     });
   }
 }

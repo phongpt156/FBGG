@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewInit, HostBinding } from '@angular/core';
 
 import { LoaderService } from './../shared/services/loader/loader.service';
+import { AuthService } from './../shared/services/auth/auth.service';
 
 @Component({
   selector: 'app-main-app',
@@ -9,14 +10,19 @@ import { LoaderService } from './../shared/services/loader/loader.service';
 })
 export class MainAppComponent implements OnInit {
   @HostBinding('class') classes = 'd-block';
+  user: any = {};
 
   constructor(
-    public loaderService: LoaderService
+    private loaderService: LoaderService,
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
     setTimeout(() => {
       this.loaderService.setLoadingStatus(false);
     }, 500);
+    if (this.authService.getToken() !== 'undefined') {
+      this.user = this.authService.decodeToken();
+    }
   }
 }
