@@ -1,5 +1,7 @@
 export const BACKEND_PATH = 'http://localhost:3000';
+import * as io from 'socket.io-client';
 
+export const Socket: SocketIOClient.Socket = io(BACKEND_PATH);
 export const ERROR_MESSAGES = {
   name: {
     required: 'Nhập họ tên'

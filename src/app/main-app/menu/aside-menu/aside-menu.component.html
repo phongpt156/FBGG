@@ -1,5 +1,5 @@
 <div class="aside-container pt-3">
-  <a mat-button class="pl-3 mb-4 d-flex" [matMenuTriggerFor]="menu" color="accent">
+  <a mat-button class="pl-3 mb-4 d-flex" [matMenuTriggerFor]="menu" color="warn">
     <div class="d-flex align-items-center">
       <div class="avatar img-wrapper">
         <a><img [src]="user.avatar ? user.avatar : defaultAvatarPath" alt="" /></a>
@@ -20,11 +20,13 @@
   </mat-menu>
   
   <div class="pb-4">
-    <a class="pl-4 py-1 d-flex align-items-center">
-      <div class="mix-icon-wrapper img-wrapper d-flex align-items-center">
-        <img src="/assets/imgs/edit.png" alt="" />
+    <a class="pl-4 d-flex" mat-button color="warn" (click)="openCreatePostDialog()">
+      <div class="d-flex align-items-center">
+        <div class="mix-icon-wrapper img-wrapper d-flex align-items-center">
+          <img src="/assets/imgs/edit.png" alt="" />
+        </div>
+        <div class="pl-3">Viết bài</div>
       </div>
-      <div class="pl-3">Viết bài</div>
     </a>
     <a class="pl-4 py-1 d-flex align-items-center">
       <div class="mix-icon-wrapper img-wrapper d-flex align-items-center">

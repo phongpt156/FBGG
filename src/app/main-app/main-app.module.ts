@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
-
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MainAppRoutingModule } from './main-app-routing.module';
 import { SharedModule } from './../shared/modules/shared.module';
 
@@ -18,6 +19,7 @@ import { RightMenuComponent } from './menu/right-menu/right-menu.component';
 import { NoteListComponent } from './menu/right-menu/note-list/note-list.component';
 import { SuggestComponent } from './menu/right-menu/suggest/suggest.component';
 import { PreloadPostComponent } from './homepage/body/main-body/post-list/preload-post/preload-post.component';
+import { CreatePostDialogComponent } from './menu/aside-menu/create-post-dialog/create-post-dialog.component';
 
 @NgModule({
   imports: [
@@ -25,6 +27,8 @@ import { PreloadPostComponent } from './homepage/body/main-body/post-list/preloa
     MainAppRoutingModule,
     SharedModule,
     MatCardModule,
+    MatDialogModule,
+    MatAutocompleteModule
   ],
   declarations: [
     Autosize,
@@ -38,7 +42,11 @@ import { PreloadPostComponent } from './homepage/body/main-body/post-list/preloa
     RightMenuComponent,
     NoteListComponent,
     SuggestComponent,
-    PreloadPostComponent
+    PreloadPostComponent,
+    CreatePostDialogComponent
+  ],
+  entryComponents: [
+    CreatePostDialogComponent
   ]
 })
 export class MainAppModule { }

@@ -13,7 +13,7 @@ export class AppComponent implements OnInit, OnDestroy {
   isLoading: boolean;
 
   constructor (
-    private loaderService: LoaderService
+    private loaderService: LoaderService,
   ) {}
 
   ngOnInit() {

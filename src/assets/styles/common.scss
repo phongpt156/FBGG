@@ -4,6 +4,10 @@ body {
     background-color: $main-color;
 }
 
+.fbgg-bg {
+    background-color: $main-color;
+}
+
 .login-wrapper {
     min-height: 100vh;
 }
@@ -31,4 +35,12 @@ button:focus {
 .mat-progress-bar {
     z-index: 9999;
     position: fixed !important;
+}
+
+.mat-dialog-container {
+    background-color: $main-color !important;
+}
+
+.dropdown-item.active, .dropdown-item:active {
+    background-color: #f8e9cc; 
 }

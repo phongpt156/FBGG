@@ -21,8 +21,8 @@ export class MainAppComponent implements OnInit {
     setTimeout(() => {
       this.loaderService.setLoadingStatus(false);
     }, 500);
-    if (this.authService.getToken() !== 'undefined') {
-      this.user = this.authService.decodeToken();
-    }
+    // if (this.authService.getToken() !== 'undefined') {
+    //   this.user = this.authService.decodeToken();
+    // }
   }
 }
