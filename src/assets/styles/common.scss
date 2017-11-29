@@ -1,0 +1,34 @@
+@import './variable.scss';
+
+body {
+    background-color: $main-color;
+}
+
+.login-wrapper {
+    min-height: 100vh;
+}
+
+.img-wrapper {
+    img {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+a {
+    cursor: pointer;
+}
+
+button:focus {
+    outline: none;
+}
+
+.mix-icon-wrapper {
+    width: 18px !important;
+    height: 18px !important;
+}
+
+.mat-progress-bar {
+    z-index: 9999;
+    position: fixed !important;
+}

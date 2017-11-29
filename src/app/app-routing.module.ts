@@ -13,6 +13,7 @@ const appRoutes: Routes = [
     path: '',
     component: AppComponent,
     children: [
+      { path: '', loadChildren: './main-app/main-app.module#MainAppModule' },
       { path: 'dang-nhap', component: LoginComponent },
       { path: 'dang-ky', component: RegisterComponent }
     ]

@@ -10,7 +10,7 @@
       </div>
       <div class="col-12 mb-3">
         <mat-form-field color="primary" class="w-100">
-          <input matInput placeholder="Mật khẩu" formControlName="password" required="required" />
+          <input matInput placeholder="Mật khẩu" formControlName="password" required="required" type="password" />
           <mat-error *ngIf="(loginForm.controls.password.touched || submitted) && loginForm.controls.password.hasError('required')">{{ errorMessages.password.required }}</mat-error>
         </mat-form-field>
       </div>

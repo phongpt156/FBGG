@@ -14,3 +14,5 @@ export const ERROR_MESSAGES = {
     required: 'Nhập lại mật khẩu'
   }
 }
+
+export const DEFAULT_AVATAR_PATH = '/assets/imgs/default_avatar.png';
