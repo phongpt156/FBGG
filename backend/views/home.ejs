@@ -8,6 +8,10 @@
 	<link rel="stylesheet" href="">
 	<script>
 		var socket = io("http://localhost:3000");
+		socket.emit("user_send_post_new",1);
+		socket.on("new_post",function(data){
+			console.log(data);
+		});
 	</script>
 </head>
 <body>

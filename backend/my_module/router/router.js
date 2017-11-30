@@ -1,8 +1,11 @@
-var user = require("../database/user.js");
+var user = require("../database/user");
+var topic = require("../database/topic");
 var jwt = require("jsonwebtoken");
 
 exports.routers = function(app){
-	
+	app.get("/home",function(req,res){
+		res.render("home");
+	})
 	var obj_login;
 		app.post("/api/login",function(req,res){
 			obj_login = {
@@ -29,5 +32,11 @@ exports.routers = function(app){
 				}	
 			})
 		});
+
+		app.get("/api/topic",function(req,res){
+			topic.find({}).then(function(items){
+				res.json({topics:items});
+			});
+		})
 	
 }

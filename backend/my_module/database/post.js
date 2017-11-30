@@ -24,13 +24,17 @@ exports.addCollection = function(data){
 			        collection.insert({
 			            _id: autoIndex,
 			            title:data.title,
-			            decription:data.decription,
-			            link:data.link,
+			            description:data.description,
+			            documentLink:data.documentLink,
 						user_id:data.user_id,
 						topic_name:data.topic_name,
-			            author:data.author,
-			            linkShare:data.linkShare,
-			            type:data.type
+			            author:data.author || '',
+			            linkShare:data.linkShare || '',
+						type:data.type || '',
+						like:0,
+						pin:0,
+						share:0,
+						report:0
 			        });
 			        console.log("inserted collection "+ name_collection);
 			    });

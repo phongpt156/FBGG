@@ -28,8 +28,9 @@ exports.addCollection = function(data){
 			            mail:data.mail,
 			            phone:data.phone,
 			            password:data.password,
-			            address:data.address,
-			            ratting:data.ratting
+						address:data.address,
+						avatar:"",
+			            ratting:0
 			        });
 			        console.log("inserted collection "+ name_collection);
 			    });

@@ -1,4 +1,4 @@
-export const BACKEND_PATH = 'http://localhost:3000';
+export const BACKEND_PATH = 'http://192.168.1.3:3000';
 import * as io from 'socket.io-client';
 
 export const Socket: SocketIOClient.Socket = io(BACKEND_PATH);

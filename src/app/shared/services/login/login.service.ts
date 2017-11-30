@@ -16,28 +16,11 @@ export class LoginService {
     private http: HttpClient,
     private router: Router,
     private authService: AuthService
-  ) {
-  }
+  ) {}
 
   login(user): Observable<any> {
     const options = createCommonHeaders();
 
     return this.http.post(USER.login, user, options);
-  }
-
-  register(user) {
-    Socket.emit('register', user)
-    // const options = createCommonHeaders();
-
-    // return this.http.post(USER.register, user, options);
-  }
-
-  consumeEvenOnRegister() {
-    Socket.on('register_res', (data) => {
-      if (data.token) {
-        this.authService.setToken(data.token);
-        this.router.navigate(['/']);
-      }
-    });
   }
 }

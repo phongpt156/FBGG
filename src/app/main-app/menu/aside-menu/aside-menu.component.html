@@ -50,30 +50,14 @@
   <div class="posted-documents pb-4">
     <h6 class="pl-4 font-weight-bold"><a>Các tài liệu đã đăng</a></h6>
     <div>
-      <a class="pl-4 py-1 d-flex align-items-center">
-        <div class="img-wrapper mix-icon-wrapper d-flex align-items-center">
-          <img src="/assets/imgs/school-material.png" alt="" />
-        </div>
-        <div class="pl-3 posted-document-title" title="Các phần mềm ứng dụng trong doanh nghiệp">Các phần mềm ứng dụng trong doanh nghiệp</div>
-      </a>
-      <a class="pl-4 py-1 d-flex align-items-center">
-        <div class="img-wrapper mix-icon-wrapper d-flex align-items-center">
-          <img src="/assets/imgs/school-material.png" alt="" />
-        </div>
-        <div class="pl-3 posted-document-title" title="Các phần mềm ứng dụng trong doanh nghiệp">Các phần mềm ứng dụng trong doanh nghiệp</div>
-      </a>
-      <a class="pl-4 py-1 d-flex align-items-center">
-        <div class="img-wrapper mix-icon-wrapper d-flex align-items-center">
-          <img src="/assets/imgs/school-material.png" alt="" />
-        </div>
-        <div class="pl-3 posted-document-title" title="Các phần mềm ứng dụng trong doanh nghiệp">Các phần mềm ứng dụng trong doanh nghiệp</div>
-      </a>
-      <a class="pl-4 py-1 d-flex align-items-center">
-        <div class="img-wrapper mix-icon-wrapper d-flex align-items-center">
-          <img src="/assets/imgs/school-material.png" alt="" />
-        </div>
-        <div class="pl-3 posted-document-title" title="Các phần mềm ứng dụng trong doanh nghiệp">Các phần mềm ứng dụng trong doanh nghiệp</div>
-      </a>
+      <ng-container *ngFor="let document of postedDocuments; let i = index">
+        <a class="pl-4 py-1 d-flex align-items-center" *ngIf="i < 5">
+          <div class="img-wrapper mix-icon-wrapper d-flex align-items-center">
+            <img src="/assets/imgs/school-material.png" alt="" />
+          </div>
+          <div class="pl-3 posted-document-title" title="{{ document.title }}">{{ document.title }}</div>
+        </a>
+      </ng-container>
     </div>
   </div>
   <div class="topics-concern pb-4">

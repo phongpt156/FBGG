@@ -4,7 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ERROR_MESSAGES } from './../shared/constants/constants';
 
 import { LoaderService } from './../shared/services/loader/loader.service';
-import { LoginService } from './../shared/services/login/login.service';
+import { LoginSocketService } from '../shared/services/login/login-socket.service';
 
 @Component({
   selector: 'app-register',
@@ -19,12 +19,10 @@ export class RegisterComponent implements OnInit {
   constructor(
     private _fb: FormBuilder,
     private loaderService: LoaderService,
-    private loginService: LoginService,
+    private loginSocketService: LoginSocketService,
   ) { }
 
   ngOnInit() {
-    this.loginService.consumeEvenOnRegister();
-
     this.registerForm = this._fb.group({
       name: ['', Validators.required],
       nickName: [''],
@@ -50,6 +48,6 @@ export class RegisterComponent implements OnInit {
     body.phone = this.registerForm.value.phone;
     body.address =this.registerForm.value.address;
 
-    this.loginService.register(body);
+    this.loginSocketService.register(body);
   }
 }

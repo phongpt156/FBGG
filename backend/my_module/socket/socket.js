@@ -39,7 +39,8 @@ exports.connectSocket = function(server,app){
 				            mail:data.mail,
 				            phone:data.phone,
 				            password:data.password,
-				            address:data.address,
+							address:data.address,
+							avatar:"",
 				            ratting:0
 				        };				       
 				        collection.insert(dt_inssert);
@@ -84,7 +85,15 @@ exports.connectSocket = function(server,app){
 				socket.emit("server_send_all_post_about_topic",items)
 			});
 		});
-
+		// send post limit 5
+		mongo_client.connect(url, function(err, db) {
+			if (err) throw err;
+			db.collection("post").find().sort({_id:-1}).limit(5).toArray(function(err, result) {
+			  if (err) throw err;
+			  socket.emit("server_send_post_limit_5",result);
+			  db.close();
+			});
+		  });
 		// send post new
 		socket.on("user_send_post_new",function(data){
 			post.addCollection(data);
@@ -95,6 +104,15 @@ exports.connectSocket = function(server,app){
 		topic.find({}).then(function(items){
 			socket.emit("server_send_all_topic",items);
 		});
+		//send topic limit 5
+		mongo_client.connect(url, function(err, db) {
+			if (err) throw err;
+			db.collection("topic").find().sort({_id:-1}).limit(5).toArray(function(err, result) {
+			  if (err) throw err;
+			  socket.emit("server_send_topic_limit_5",result);
+			  db.close();
+			});
+		  });
 
 		// topic care
 		socket.on("req_send_all_topic_care",function(data){
@@ -114,6 +132,8 @@ exports.connectSocket = function(server,app){
 				socket.emit("server_send_all_your_post",items)
 			});
 		});
+		//load comment limit 2
+		
 	});
 
 	io.on("disconnect",function(){

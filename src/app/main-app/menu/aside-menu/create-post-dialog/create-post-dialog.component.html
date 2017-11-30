@@ -15,7 +15,6 @@
       </div>
       <mat-form-field class="w-100">
         <textarea matInput autosize placeholder="Mô tả ngắn cho tài liệu của bạn" formControlName="description">
-
         </textarea>
       </mat-form-field>
     </div>
@@ -58,6 +57,16 @@
           <img src="/assets/imgs/add-refer-document-icon.png" alt="" />
         </div>
       </div>
+    </div>
+    <div>
+    <mat-form-field class="example-full-width">
+      <input type="text" placeholder="Chủ đề" matInput formControlName="topics" [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+        <mat-option *ngFor="let topic of filteredTopics | async" [value]="topic">
+          {{ topic.name }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
     </div>
   </mat-dialog-content>
   <mat-dialog-actions class="justify-content-end mt-3">
