@@ -1,4 +1,4 @@
-import { Component, OnInit, HostBinding } from '@angular/core';
+import { Component, OnInit, Input, HostBinding } from '@angular/core';
 
 import { DEFAULT_AVATAR_PATH } from './../../../../../shared/constants/constants';
 
@@ -9,6 +9,7 @@ import { DEFAULT_AVATAR_PATH } from './../../../../../shared/constants/constants
 })
 export class PostItemComponent implements OnInit {
   @HostBinding('class') classes = 'd-block mb-5';
+  @Input() post: any;
 
   defaultAvatarPath: string = DEFAULT_AVATAR_PATH;
 

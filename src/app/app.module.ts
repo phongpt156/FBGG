@@ -75,8 +75,9 @@ export class AppModule {
   }
 
   consumeSocketEven() {
-    this.loginSocketService.consumeEvenOnRegister();
-    this.postSocketService.consumeEvenOnAdd();
-    this.userSocketService.consumeEvenOnGetPostedDocuments();
+    this.loginSocketService.consumeEventOnRegister();
+    this.postSocketService.consumeEventOnAdd();
+    this.postSocketService.consumeEventOnGetPosts();
+    this.userSocketService.consumeEventOnGetPostedDocuments();
   }
 }

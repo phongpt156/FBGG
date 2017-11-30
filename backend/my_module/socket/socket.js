@@ -85,15 +85,37 @@ exports.connectSocket = function(server,app){
 				socket.emit("server_send_all_post_about_topic",items)
 			});
 		});
-		// send post limit 5
+		// send post and comment limit 5
+		
 		mongo_client.connect(url, function(err, db) {
 			if (err) throw err;
 			db.collection("post").find().sort({_id:-1}).limit(5).toArray(function(err, result) {
 			  if (err) throw err;
-			  socket.emit("server_send_post_limit_5",result);
-			  db.close();
+			  for(let i in result){
+				//   console.log(result[i]);
+				var user_post;
+					user.find({_id:result[i].user_id}).then(function(items){
+		
+						db.collection("user_comment_post").find({post_id:result[i]._id}).sort({_id:-1}).limit(2).toArray(function(err,res){
+							if (err) {
+								throw err;
+							}
+							var data = {
+								post: result[i],
+								comment:res,
+								user_post:items[0]
+							};
+							socket.emit("server_send_post_and_comment",data);			
+							db.close();
+							});
+		
+					});
+				  
+				}
+				
 			});
 		  });
+		
 		// send post new
 		socket.on("user_send_post_new",function(data){
 			post.addCollection(data);

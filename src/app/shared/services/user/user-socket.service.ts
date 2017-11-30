@@ -18,7 +18,7 @@ export class UserSocketService {
     Socket.emit('req_send_all_my_post', 1);
   }
 
-  consumeEvenOnGetPostedDocuments() {
+  consumeEventOnGetPostedDocuments() {
     Socket.on('server_send_all_your_post', data => {
       this.userService.setPostedDocuments(data);
     });

@@ -16,7 +16,7 @@ export class LoginSocketService {
     Socket.emit('register', user);
   }
 
-  consumeEvenOnRegister() {
+  consumeEventOnRegister() {
     Socket.on('register_res', (data) => {
       if (data.token) {
         this.authService.setToken(data.token);
