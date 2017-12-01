@@ -41,7 +41,9 @@ exports.connectSocket = function(server,app){
 				            password:data.password,
 							address:data.address,
 							avatar:"",
-				            ratting:0
+							ratting:0,
+							created_at:"",
+							updated_at:""
 				        };				       
 				        collection.insert(dt_inssert);
 
@@ -117,10 +119,50 @@ exports.connectSocket = function(server,app){
 		  });
 		
 		// send post new
-		socket.on("user_send_post_new",function(data){
-			post.addCollection(data);
-			io.emit("new_post",data);
-		});
+		app.post("/api/post",function(req,res){
+			console.log(req.files.documentFile);
+			console.log(req.body);
+			console.log(JSON.parse(req.body.referDocuments));
+			  if (req.files) {
+				filename = req.files.documentFile.name;
+				console.log(req.files.documentFile);
+				req.files.documentFile.mv("./upload/"+filename,function(err){
+				  if (err) throw err;
+				});
+			  }
+
+			  mongo_client.connect(url, function(err, db) {
+				if (err) throw err;
+				var documentLink;
+				var myobj = {
+					title:req.body.title,
+					description:req.body.description,
+					documentLink:documentLink,
+					referDocuments:req.body.referDocuments,
+					user_id:req.body.user_id,
+					topic_name:req.body.topic_name,
+					author:req.body.author || '',
+					linkShare:req.body.linkShare || '',
+					type:req.body.type || '',
+					like:0,
+					pin:0,
+					share:0,
+					report:0,
+					created_at:req.body.created_at,
+					updated_at:req.body.updated_at
+				};
+				if (req.files && req.files.documentFile) {
+					myobj.documentFile = "/upload/" + req.files.documentFile.name;
+				}
+				db.collection("post").insertOne(myobj, function(err, res) {
+					console.log(myobj);
+				  if (err) throw err;
+				  console.log("1 document inserted");
+				  db.close();
+				});
+			  });
+		  });
+		  
 		// send all topic
 
 		topic.find({}).then(function(items){

@@ -6,10 +6,10 @@
       </div>
       <div class="pl-2">
         <div class="user-name font-weight-bold">
-          <a>{{ post.user.nickName || post.user.name }}</a>
+          <a>{{ post.user?.nickName || post.user?.name }}</a>
         </div>
         <div class="posted-time">
-          {{ user.created_at | timeAgo }}
+          {{ post.created_at | timeAgo }}
         </div>
       </div>
     </div>
@@ -22,7 +22,7 @@
       {{ post.description }}
     </div>
     <div class="document my-3 px-2">
-      <a [href]="post.documentLink" target="_blank" [title]="post.documentLink">{{ post.documentLink }}</a>
+      <a [href]="post.documentFile ? backendPath + post.documentFile : post.documentLink" target="_blank" [title]="post.documentFile ? backendPath + post.documentFile : post.documentLink">{{ post.documentFile ? backendPath + post.documentFile : post.documentLink }}</a>
     </div>
   </mat-card-content>
   <mat-card-actions class="my-3 mx-0">

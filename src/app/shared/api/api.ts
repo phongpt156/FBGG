@@ -8,3 +8,7 @@ export const USER = {
 export const TOPIC = {
     getAll: BACKEND_PATH + '/api/topic'
 }
+
+export const POST = {
+    add: BACKEND_PATH + '/api/post'
+}

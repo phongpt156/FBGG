@@ -20,12 +20,14 @@ exports.addCollection = function(data){
 	mongo_client.connect(url,function(err,db){
 				if (err) throw err;
 				autoIncrement.getNextSequence(db, name_collection, function (err, autoIndex) {
-			        var collection = db.collection(name_collection);
+					var collection = db.collection(name_collection);
+					
 			        collection.insert({
 			            _id: autoIndex,
 			            title:data.title,
 			            description:data.description,
-			            documentLink:data.documentLink,
+						documentLink:data.documentLink,
+						referDocuments:data.referDocuments,
 						user_id:data.user_id,
 						topic_name:data.topic_name,
 			            author:data.author || '',

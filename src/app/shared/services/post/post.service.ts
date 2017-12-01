@@ -6,6 +6,8 @@ import { Subject } from 'rxjs/Subject';
 
 import { createCommonHeaders } from './../../../shared/functions/http-req';
 
+import { POST } from './../../../shared/api/api';
+
 @Injectable()
 export class PostService {
   posts: any[] = [];
@@ -26,5 +28,11 @@ export class PostService {
 
   unshiftPost(post) {
     this.posts.unshift(post);
+  }
+
+  addPostToServer(post): Observable<any> {
+    const options = createCommonHeaders('');
+
+    return this.http.post(POST.add, post, options);
   }
 }

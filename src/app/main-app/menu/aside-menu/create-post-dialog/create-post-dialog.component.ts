@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Observable } from 'rxjs/Observable';
@@ -8,6 +8,7 @@ import { map } from 'rxjs/operators/map';
 import { TopicService } from './../../../../shared/services/topic/topic.service';
 import { AuthService } from './../../../../shared/services/auth/auth.service';
 import { PostSocketService } from '../../../../shared/services/post/post-socket.service';
+import { PostService } from '../../../../shared/services/post/post.service';
 
 @Component({
   selector: 'app-create-post-dialog',
@@ -15,6 +16,8 @@ import { PostSocketService } from '../../../../shared/services/post/post-socket.
   styleUrls: ['./create-post-dialog.component.scss']
 })
 export class CreatePostDialogComponent implements OnInit {
+  @ViewChild('documentFile') documentFile;
+ 
   createPostForm: FormGroup;
   topics: any[] = [];
   filteredTopics: Observable<any[]>;
@@ -25,7 +28,8 @@ export class CreatePostDialogComponent implements OnInit {
     private _fb: FormBuilder,
     private topicService: TopicService,
     private authService: AuthService,
-    private postSocketService: PostSocketService
+    private postSocketService: PostSocketService,
+    private postService: PostService
   ) { }
 
   ngOnInit() {
@@ -81,25 +85,38 @@ export class CreatePostDialogComponent implements OnInit {
   }
 
   documentFileChange(e) {
-    this.createPostForm.controls.documentLink.setValue(e.files[0].name);
     console.log(e.files);
+    this.createPostForm.controls.documentLink.setValue(e.files[0].name);
   }
 
   onSubmit() {
-    console.log(this.createPostForm.value);
     if (this.createPostForm.valid) {
-      const body: any = {};
-      body.title = this.createPostForm.value.title;
-      body.desciption = this.createPostForm.value.desciption;
-      body.documentLink = this.createPostForm.value.documentLink;
-      body.referDocuments = this.createPostForm.value.referDocuments;
-      body.topics = this.createPostForm.value.topics;
-      body.user_id = this.user._id;
-      body.topic_name = this.createPostForm.value.topics.name;
-      body.created_at = Date.now();
-      body.updated_at = Date.now();
-
-      this.postSocketService.add(body);
+      // const body: any = {};
+      // body.title = this.createPostForm.value.title;
+      // body.description = this.createPostForm.value.description;
+      // body.documentLink = this.createPostForm.value.documentLink;
+      // body.documentFile = this.documentFile.nativeElement.files[0];
+      // body.referDocuments = this.createPostForm.value.referDocuments;
+      // body.topics = this.createPostForm.value.topics;
+      // body.user_id = this.user._id;
+      // body.topic_name = this.createPostForm.value.topics.name;
+      // body.created_at = Date.now();
+      // body.updated_at = Date.now();
+      let formData: FormData = new FormData();
+      formData.append('title', this.createPostForm.value.title);
+      formData.append('description', this.createPostForm.value.description);
+      formData.append('documentLink', this.createPostForm.value.documentLink);
+      formData.append('referDocuments', JSON.stringify(this.createPostForm.value.referDocuments));
+      formData.append('topics', this.createPostForm.value.topics);
+      formData.append('user_id', this.user._id);
+      formData.append('topic_name', this.createPostForm.value.topics.name);
+      formData.append('created_at', JSON.stringify(Date.now()));
+      formData.append('updated_at', JSON.stringify(Date.now()));
+      formData.append('documentFile', this.documentFile.nativeElement.files[0]);
+      this.postService.addPostToServer(formData)
+      .subscribe(res => {
+        console.log(res);
+      });
       this.dialog.close();
     }
   }

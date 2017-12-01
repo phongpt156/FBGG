@@ -1,5 +1,5 @@
 <h2 mat-dialog-title>Tạo mới tài liệu</h2>
-<form [formGroup]="createPostForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="createPostForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
   <mat-dialog-content>
     <div class="d-flex">
       <div class="img-wrapper mr-4 mt-3">
@@ -61,7 +61,7 @@
     </div>
     <div>
     <mat-form-field class="example-full-width">
-      <input type="text" placeholder="Chủ đề" matInput formControlName="topics" [matAutocomplete]="auto">
+      <input type="text" placeholder="Chủ đề" matInput formControlName="topics" [matAutocomplete]="auto" required="required">
       <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
         <mat-option *ngFor="let topic of filteredTopics | async" [value]="topic">
           {{ topic.name }}
