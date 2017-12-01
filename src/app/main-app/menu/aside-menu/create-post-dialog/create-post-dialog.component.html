@@ -26,14 +26,15 @@
         <input type="text" matInput placeholder="Link tài liệu của bạn" formControlName="documentLink" required="required" />
       </mat-form-field>
     </div>
-    <div class="d-flex upload-wrapper">
+    <label class="d-flex upload-wrapper" for="documentFile">
       <div class="img-wrapper mt-3 mr-4" style="cursor: pointer">
         <i class="fa fa-cloud-upload"></i>
       </div>
       <mat-form-field class="w-100" style="cursor: pointer">
-        <input type="text" matInput placeholder="hoặc up file" disabled="disabled" />
+        <input type="text" matInput placeholder="Hoặc up file" disabled="disabled" />
       </mat-form-field>
-    </div>
+      <input type="file" name="" id="documentFile" hidden="hidden" (change)="documentFileChange(documentFile)" #documentFile accept=".pdf, .doc, .docx, .xls, .xlsx" />
+    </label>
     <div formArrayName="referDocuments">
       <div *ngFor="let referDocument of createPostForm.controls.referDocuments.controls; let i = index">
         <div [formGroupName]="i">

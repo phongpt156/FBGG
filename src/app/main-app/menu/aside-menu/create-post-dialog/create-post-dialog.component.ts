@@ -37,6 +37,7 @@ export class CreatePostDialogComponent implements OnInit {
       title: ['', Validators.required],
       description: [''],
       documentLink: ['', Validators.required],
+      documentFile: [''],
       referDocuments: this._fb.array([this.initReferDocument()]),
       topics: ['', Validators.required]
     });
@@ -79,8 +80,9 @@ export class CreatePostDialogComponent implements OnInit {
     control.removeAt(i);
   }
 
-  topicChange(e) {
-    console.log(e);
+  documentFileChange(e) {
+    this.createPostForm.controls.documentLink.setValue(e.files[0].name);
+    console.log(e.files);
   }
 
   onSubmit() {
