@@ -36,9 +36,8 @@ export class PostSocketService implements OnInit {
   consumeEventOnGetPosts() {
     Socket.on('server_send_post_and_comment', data => {
       const post: any = data.post;
-      if (this.authSerice.getToken() != 'undefined' && this.authSerice.isAuthenticated()) {
-        post.user = this.authSerice.decodeToken();
-      }
+      console.log(data);
+      post.user = data.user_post;
       post.comment = data.comment;
       this.postService.addPost(post);
     });

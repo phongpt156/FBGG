@@ -22,6 +22,8 @@ import { NoteListComponent } from './menu/right-menu/note-list/note-list.compone
 import { SuggestComponent } from './menu/right-menu/suggest/suggest.component';
 import { PreloadPostComponent } from './homepage/body/main-body/post-list/preload-post/preload-post.component';
 import { CreatePostDialogComponent } from './menu/aside-menu/create-post-dialog/create-post-dialog.component';
+import { ChatboxListComponent } from './menu/aside-menu/chatbox-list/chatbox-list.component';
+import { ChatboxListItemComponent } from './menu/aside-menu/chatbox-list-item/chatbox-list-item.component';
 
 @NgModule({
   imports: [
@@ -46,10 +48,12 @@ import { CreatePostDialogComponent } from './menu/aside-menu/create-post-dialog/
     NoteListComponent,
     SuggestComponent,
     PreloadPostComponent,
-    CreatePostDialogComponent
+    CreatePostDialogComponent,
+    ChatboxListComponent,
+    ChatboxListItemComponent
   ],
   entryComponents: [
-    CreatePostDialogComponent
+    CreatePostDialogComponent,
   ]
 })
 export class MainAppModule { }

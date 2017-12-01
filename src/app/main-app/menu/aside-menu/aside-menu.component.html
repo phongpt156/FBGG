@@ -35,15 +35,18 @@
         <div class="pl-3">Viết bài</div>
       </div>
     </a>
-    <a class="pl-4 d-flex align-items-center">
-      <div class="mix-icon-wrapper img-wrapper d-flex align-items-center">
-        <img src="/assets/imgs/message_icon.png" alt="" />
-        <div class="notifi">
-          <div class="notifi-count-value">3</div>
+    <a class="pl-4 d-flex" mat-button color="warn" (click)="toggleChatboxList()">
+      <div class="d-flex align-items-center">
+        <div class="mix-icon-wrapper img-wrapper d-flex align-items-center">
+          <img src="/assets/imgs/message_icon.png" alt="" />
+          <div class="notifi">
+            <div class="notifi-count-value">3</div>
+          </div>
         </div>
+        <div class="pl-3">Tin nhắn</div>
       </div>
-      <div class="pl-3">Tin nhắn</div>
       <div class="custom-focus-overlay"></div>
+      <app-chatbox-list *ngIf="isDisplayChatboxList"></app-chatbox-list>
     </a>
     <a class="pl-4 d-flex align-items-center">
       <div class="mix-icon-wrapper img-wrapper d-flex align-items-center">

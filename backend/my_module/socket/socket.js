@@ -120,15 +120,12 @@ exports.connectSocket = function(server,app){
 		
 		// send post new
 		app.post("/api/post",function(req,res){
-			console.log(req.files.documentFile);
-			console.log(req.body);
-			console.log(JSON.parse(req.body.referDocuments));
 			  if (req.files) {
-				filename = req.files.documentFile.name;
-				console.log(req.files.documentFile);
-				req.files.documentFile.mv("./upload/"+filename,function(err){
-				  if (err) throw err;
-				});
+					filename = req.files.documentFile.name;
+					console.log(req.files.documentFile);
+					req.files.documentFile.mv("./upload/"+filename,function(err){
+						if (err) throw err;
+					});
 			  }
 
 			  mongo_client.connect(url, function(err, db) {
@@ -137,9 +134,9 @@ exports.connectSocket = function(server,app){
 				var myobj = {
 					title:req.body.title,
 					description:req.body.description,
-					documentLink:documentLink,
+					documentLink:req.body.documentLink,
 					referDocuments:req.body.referDocuments,
-					user_id:req.body.user_id,
+					user_id:Number(req.body.user_id),
 					topic_name:req.body.topic_name,
 					author:req.body.author || '',
 					linkShare:req.body.linkShare || '',
@@ -192,9 +189,12 @@ exports.connectSocket = function(server,app){
 		
 		// post đã đăng
 		socket.on("req_send_all_my_post",function(data){
-			post.find({user_id:decoded_token._id}).then(function(items){
-				socket.emit("server_send_all_your_post",items)
-			});
+			jwt.verify(data.token,'FBGGJWTToken',function(err,decoded){
+				post.find({user_id:decoded._id}).then(function(items){
+					console.log(items);
+					socket.emit("server_send_all_your_post",items)
+				});
+			});	
 		});
 		//load comment limit 2
 		

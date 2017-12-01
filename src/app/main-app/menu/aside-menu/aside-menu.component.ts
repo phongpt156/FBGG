@@ -10,6 +10,7 @@ import { UserSocketService } from '../../../shared/services/user/user-socket.ser
 import { UserService } from '../../../shared/services/user/user.service';
 
 import { CreatePostDialogComponent } from './create-post-dialog/create-post-dialog.component';
+import { ChatboxListComponent } from './chatbox-list/chatbox-list.component';
 
 @Component({
   selector: 'app-aside-menu',
@@ -23,9 +24,10 @@ export class AsideMenuComponent implements OnInit, OnDestroy {
   createPostDialog: MatDialogRef<CreatePostDialogComponent>;
   dialogConfig: MatDialogConfig = {
     panelClass: ['mix-bg', 'w-50']
-  }
+  };
   _subscription: Subscription;
   postedDocuments: any[] = [];
+  isDisplayChatboxList = false;
 
   constructor(
     private router: Router,
@@ -55,5 +57,9 @@ export class AsideMenuComponent implements OnInit, OnDestroy {
 
   openCreatePostDialog() {
     this.createPostDialog = this.dialog.open(CreatePostDialogComponent, this.dialogConfig);
+  }
+
+  toggleChatboxList() {
+    this.isDisplayChatboxList = !this.isDisplayChatboxList;
   }
 }

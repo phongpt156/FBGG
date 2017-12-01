@@ -26,7 +26,7 @@ export class RightMenuComponent implements OnInit {
 
   setView(windowWidth: number) {
     if (windowWidth < 950) {
-      this.displayNoteList = false
+      this.displayNoteList = false;
       this.displaySuggest = false;
       this.elWidth = 24;
     } else if (windowWidth < 1237) {
