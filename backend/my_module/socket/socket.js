@@ -106,7 +106,7 @@ exports.connectSocket = function(server,app){
 								user_post:items[0]
 							};
 							socket.emit("server_send_post_and_comment",data);			
-							db.close();
+							
 							});
 		
 					});
