@@ -1,6 +1,12 @@
 @import './variable.scss';
 
+@font-face {
+    font-family: FBGGFont;
+    src: url('/assets/fonts/MyriadPro-Regular.otf');
+}
+
 body {
+    font-family: FBGGFont;
     background-color: $main-color;
 }
 
@@ -47,4 +53,27 @@ textarea {
 
 .dropdown-item.active, .dropdown-item:active {
     background-color: #f8e9cc; 
+}
+
+.mix-icon-wrapper {
+    position: relative;
+
+    .notifi {
+        top: -4px;
+        right: -4px;
+        position: absolute;
+        display: flex;
+    
+        .notifi-count-value {
+            width: 12px;
+            justify-content: center;
+            height: 12px;
+            font-size: 9px;
+            display: flex;
+            color: #fff;
+            border-radius: 4px;
+            background-color: #fa3e3e;
+            align-items: center;
+        }
+    }
 }

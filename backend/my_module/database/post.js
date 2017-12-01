@@ -34,7 +34,9 @@ exports.addCollection = function(data){
 						like:0,
 						pin:0,
 						share:0,
-						report:0
+						report:0,
+						created_at:data.created_at,
+						updated_at:data.updated_at
 			        });
 			        console.log("inserted collection "+ name_collection);
 			    });

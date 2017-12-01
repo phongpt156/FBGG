@@ -31,3 +31,34 @@ a {
     overflow: hidden;
     width: 160px;
 }
+
+a {
+    line-height: 34px;
+
+    &.align-items-center {
+        position: relative;
+
+        &:hover {
+            .custom-focus-overlay {
+                display: block;
+            }
+        }
+
+        &.active {
+            .custom-focus-overlay {
+                display: block;
+            }
+        }
+    }
+}
+
+.custom-focus-overlay {
+    top: 0;
+    right: 0;
+    position: absolute;
+    opacity: 1;
+    left: 0;
+    display: none;
+    bottom: 0;
+    background-color: rgba(244,67,54,.12);
+}

@@ -19,7 +19,14 @@
     </button>
   </mat-menu>
   
-  <div class="pb-4">
+  <div class="pb-2 fbgg-nav">
+    <a class="pl-4 d-flex align-items-center" routerLink="/" routerLinkActive="active">
+      <div class="mix-icon-wrapper img-wrapper d-flex align-items-center">
+        <img src="/assets/imgs/star-icon.png" alt="" />
+      </div>
+      <div class="pl-3">Tài liệu mới nhất</div>
+      <div class="custom-focus-overlay"></div>
+    </a>
     <a class="pl-4 d-flex" mat-button color="warn" (click)="openCreatePostDialog()">
       <div class="d-flex align-items-center">
         <div class="mix-icon-wrapper img-wrapper d-flex align-items-center">
@@ -28,30 +35,47 @@
         <div class="pl-3">Viết bài</div>
       </div>
     </a>
-    <a class="pl-4 py-1 d-flex align-items-center">
+    <a class="pl-4 d-flex align-items-center">
+      <div class="mix-icon-wrapper img-wrapper d-flex align-items-center">
+        <img src="/assets/imgs/message_icon.png" alt="" />
+        <div class="notifi">
+          <div class="notifi-count-value">3</div>
+        </div>
+      </div>
+      <div class="pl-3">Tin nhắn</div>
+      <div class="custom-focus-overlay"></div>
+    </a>
+    <a class="pl-4 d-flex align-items-center">
       <div class="mix-icon-wrapper img-wrapper d-flex align-items-center">
         <img src="/assets/imgs/notification.png" alt="" />
+        <div class="notifi">
+          <div class="notifi-count-value">15</div>
+        </div>
       </div>
-      <div class="pl-3">15 thông báo</div>
+      <div class="pl-3">Thông báo</div>
+      <div class="custom-focus-overlay"></div>
     </a>
-    <a class="pl-4 py-1 d-flex align-items-center">
+    <a class="pl-4 d-flex align-items-center">
       <div class="mix-icon-wrapper img-wrapper d-flex align-items-center">
         <img src="/assets/imgs/follow-icon.png" alt="" />
+        <div class="notifi">
+          <div class="notifi-count-value">5</div>
+        </div>
       </div>
-      <div class="pl-3">3 người theo dõi</div>
-    </a>
-    <a class="pl-4 py-1 d-flex align-items-center" routerLink="/" routerLinkActive="active">
-      <div class="mix-icon-wrapper img-wrapper d-flex align-items-center">
-        <img src="/assets/imgs/star-icon.png" alt="" />
-      </div>
-      <div class="pl-3">Tài liệu mới nhất</div>
+      <div class="pl-3">Người theo dõi</div>
+      <div class="custom-focus-overlay"></div>
     </a>
   </div>
-  <div class="posted-documents pb-4">
-    <h6 class="pl-4 font-weight-bold"><a>Các tài liệu đã đăng</a></h6>
+  <div class="posted-documents pb-1 fbgg-nav">
+    <h6>
+      <a class="d-block pl-4 font-weight-bold align-items-center">
+        Các tài liệu đã đăng
+        <div class="custom-focus-overlay"></div>
+      </a>
+    </h6>
     <div>
       <ng-container *ngFor="let document of postedDocuments; let i = index">
-        <a class="pl-4 py-1 d-flex align-items-center" *ngIf="i < 5">
+        <a class="pl-4 d-flex align-items-center" *ngIf="i < 5">
           <div class="img-wrapper mix-icon-wrapper d-flex align-items-center">
             <img src="/assets/imgs/school-material.png" alt="" />
           </div>
@@ -60,26 +84,35 @@
       </ng-container>
     </div>
   </div>
-  <div class="topics-concern pb-4">
-    <h6 class="pl-4 font-weight-bold"><a>Các chủ đề quan tâm</a></h6>
+  <div class="topics-concern pb-1 fbgg-nav">
+    <h6>
+      <a class="d-block pl-4 font-weight-bold align-items-center">
+        Các chủ đề quan tâm
+        <div class="custom-focus-overlay"></div>
+      </a>
+      <div class="custom-focus-overlay"></div>
+    </h6>
     <div>
-      <a class="pl-4 py-1 d-flex align-items-center">
+      <a class="pl-4 d-flex align-items-center">
         <div class="img-wrapper mix-icon-wrapper d-flex align-items-center">
           <img src="/assets/imgs/internet.png" alt="" />
         </div>
         <div class="pl-3 topic-concern-title" title="Công nghệ thông tin">Công nghệ thông tin</div>
+        <div class="custom-focus-overlay"></div>
       </a>
-      <a class="pl-4 py-1 d-flex align-items-center">
+      <a class="pl-4 d-flex align-items-center">
         <div class="img-wrapper mix-icon-wrapper d-flex align-items-center">
           <img src="/assets/imgs/game-controller.png" alt="" />
         </div>
         <div class="pl-3 topic-concern-title" title="Game">Game</div>
+        <div class="custom-focus-overlay"></div>
       </a>
-      <a class="pl-4 py-1 d-flex align-items-center">
+      <a class="pl-4 d-flex align-items-center">
         <div class="img-wrapper mix-icon-wrapper d-flex align-items-center">
           <img src="/assets/imgs/painting-palette.png" alt="" />
         </div>
         <div class="pl-3 topic-concern-title" title="Designer">Designer</div>
+        <div class="custom-focus-overlay"></div>
       </a>
     </div>
   </div>

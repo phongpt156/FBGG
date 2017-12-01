@@ -13,7 +13,6 @@ import { RegisterComponent } from './register/register.component';
 const appRoutes: Routes = [
   {
     path: '',
-    component: AppComponent,
     children: [
       { path: '', loadChildren: './main-app/main-app.module#MainAppModule', canActivate: [AuthGuardService] },
       { path: 'dang-nhap', component: LoginComponent, canActivate: [CheckLoginService] },

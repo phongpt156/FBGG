@@ -11,7 +11,7 @@ import { AuthService } from '../shared/services/auth/auth.service';
   styleUrls: ['./main-app.component.scss']
 })
 export class MainAppComponent implements OnInit {
-  @HostBinding('class') classes = 'd-block';
+  @HostBinding('class') classes = 'd-flex';
   user: any = {};
   _subscription: Subscription;
 

@@ -9,7 +9,7 @@
           <a>{{ post.user.nickName || post.user.name }}</a>
         </div>
         <div class="posted-time">
-          1 giờ
+          {{ user.created_at | timeAgo }}
         </div>
       </div>
     </div>

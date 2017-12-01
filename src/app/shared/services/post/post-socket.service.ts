@@ -24,6 +24,7 @@ export class PostSocketService implements OnInit {
   consumeEventOnAdd() {
     Socket.on('new_post', data => {
       const user = this.userService.getUser();
+      data.user = user;
 
       if (data.user_id == user._id) {
         this.userService.addPostedDocument(data);
@@ -33,12 +34,14 @@ export class PostSocketService implements OnInit {
   }
 
   consumeEventOnGetPosts() {
-    Socket.on('server_send_post_and_comment', data => {
+    Socket.on('server_send_post_and_com ment', data => {
       console.log(data);
-      data.post.comment = data.comment;
-      data.post.user = data.user_post;
+      const post: any = data.post;
+      post.comment = data.post;
+      post.user = data.user_post;
 
-      this.postService.addPost(data.post);
+      console.log(post);
+      this.postService.addPost(post);
     });
   }
 }

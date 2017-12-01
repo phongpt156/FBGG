@@ -84,6 +84,7 @@ export class CreatePostDialogComponent implements OnInit {
   }
 
   onSubmit() {
+    console.log(this.createPostForm.value);
     if (this.createPostForm.valid) {
       const body: any = {};
       body.title = this.createPostForm.value.title;

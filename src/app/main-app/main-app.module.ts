@@ -8,6 +8,8 @@ import { SharedModule } from './../shared/modules/shared.module';
 
 import { Autosize } from 'angular2-autosize';
 
+import { TimeAgoPipe } from 'time-ago-pipe';
+
 import { AsideMenuComponent } from './menu/aside-menu/aside-menu.component';
 import { MainAppComponent } from './main-app.component';
 import { BodyComponent } from './homepage/body/body.component';
@@ -31,6 +33,7 @@ import { CreatePostDialogComponent } from './menu/aside-menu/create-post-dialog/
     MatAutocompleteModule
   ],
   declarations: [
+    TimeAgoPipe,
     Autosize,
     AsideMenuComponent,
     MainAppComponent,
