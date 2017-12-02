@@ -34,12 +34,6 @@ app.get('/upload/:filename', (req, res) => {
   })
 });
 
-var user = require("./my_module/database/user.js");
-user.createCollection();
-user.find().then(function(items) {
-  console.log(items);
-});
-
 
 var router = require("./my_module/router/router.js");
 router.routers(app);

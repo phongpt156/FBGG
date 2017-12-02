@@ -17,7 +17,10 @@ exports.connectSocket = function(server,app){
 	user_comment_post.createCollection();
 	var user_topic = require("../database/use_topic");
 	user_topic.createCollection();
-
+	var msg_2 = require("../database/msg_2");
+	msg_2.createCollection();
+	var msg_group = require("../database/msg_group");
+	msg_group.createCollection();
 	
 
 	io.on("connection",function(socket){
@@ -69,7 +72,12 @@ exports.connectSocket = function(server,app){
 				decoded_token = decoded;
 			});			
 		});
-
+		// get user
+		socket.on("req_get_user",function(data){
+			user.find({_id:data._id}).then(function(items){
+				socket.emit("server_send_info_user",items[0]);
+			})
+		})
 		// send all post 
 		socket.on("req_send_all_post",function(data){
 			mongo_client.connect(url,function(err,db){
@@ -155,8 +163,11 @@ exports.connectSocket = function(server,app){
 					console.log(myobj);
 				  if (err) throw err;
 				  console.log("1 document inserted");
+				  io.emit("server_send_new_post",myobj);
 				  db.close();
 				});
+
+				
 			  });
 		  });
 		  
@@ -196,8 +207,41 @@ exports.connectSocket = function(server,app){
 				});
 			});	
 		});
-		//load comment limit 2
-		
+		// new msg 2
+		socket.on("req_new_msg",function(data){
+			msg_2.addCollection(data);
+			io.emit("server_send_msg_new",data);
+		});
+		// server send all msg 2
+		socket.on("req_send_all_msg",function(data){
+			mongo_client.connect(url, function(err, db) {
+				if (err) throw err;
+				db.collection("msg_2").find({user_id_send:data.user_id_send,user_id_receive:data.user_id_receive}).limit(5).toArray(function(err, result) {
+				  if (err) throw err;
+				  socket.emit("server_send_all_msg_limit_5",result);
+				  db.close();
+				});
+			});
+		});
+		//get name group
+		socket.on("req_send_name_group",function(data){
+
+		});
+		// new msg group
+		socket.on("req_new_msg_group",function(data){
+			msg_group.addCollection(data);
+		});
+		//server send all msg 
+		socket.on("req_send_all_msg_group",function(data){
+			mongo_client.connect(url, function(err, db) {
+				if (err) throw err;
+				db.collection("msg_group").find({user_id_group:data.user_id_group}).limit(5).toArray(function(err, result) {
+				  if (err) throw err;
+				  socket.emit("server_send_all_msg_limit_5",result);
+				  db.close();
+				});
+			});
+		});
 	});
 
 	io.on("disconnect",function(){
