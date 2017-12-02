@@ -8,7 +8,7 @@ import { MatProgressBarModule} from '@angular/material/progress-bar';
 import { SharedModule } from './shared/modules/shared.module';
 import { AppRoutingModule } from './app-routing.module';
 
-import { Socket } from './shared/constants/constants';
+// import { Socket } from './shared/constants/constants';
 
 import { TokenInterceptor } from './shared/services/auth/token.interceptor';
 
